@@ -1,12 +1,18 @@
 import java.util.Scanner;
 
 public class User {
-    public String name; // 이름
-    public String gender; // 성별
-    public int age; // 나이
-    public int id; // 아이디
-    public int passwd; // 비밀번호
-    public int uniqueNumber; // 개인 고유번호
+    private final int uniqueNumber; // 개인 고유번호
+    private static int userCount;
+    private String name; // 이름
+    private String gender; // 성별
+    private int age; // 나이
+    private int userid; // 아이디
+    private int passwd; // 비밀번호
+
+    public User(int uniqueNumber) {
+        this.uniqueNumber = uniqueNumber;
+    }
+
 
     public void getUserSituation() {
         Scanner sc = new Scanner(System.in);
