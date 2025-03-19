@@ -3,7 +3,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea
-.iml
+Kosta_1st.iml
 
 ### Eclipse ###
 .apt_generated
