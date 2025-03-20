@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class User {
   // 모든 사용자 정보
@@ -17,9 +14,14 @@ public class User {
   private String gender; // 성별
   private String userInput; // 감정입력
 
+  public int getAge(){
+    return age;
+  }
+  public String getGender(){
+    return gender;
+  }
+
   // 생성자 (회원가입시 사용)
-
-
   public User(String userid, String password, String userName, int age, String gender) {
     this.userNumber = ++userCount; // 값을 입력받지않고 자동증가(기본키)
     this.userid = userid;
@@ -37,15 +39,22 @@ public class User {
       Scanner scanner = new Scanner(System.in);
 
       System.out.println("\n \uD83D\uDCDD 회원가입을 진행합니다.");
-      System.out.print("아이디 : ");
-      String userid = scanner.nextLine();
 
-      // 아이디 중복체크 ( 아이디 키값이 존재하는지 확인)
-      if (userDatabase.containsKey(userid)) {
-        System.out.println("❌ 이미 존재하는 아이디입니다. 다시 시도해주세요.");
-        return;
+      String userid;
+      while (true) {
+        System.out.print("아이디 : ");
+        userid = scanner.nextLine();
+
+        // 아이디 중복체크 ( 아이디 키값이 존재하는지 확인)
+
+        if (userDatabase.containsKey(userid)) {
+          System.out.println("❌ 이미 존재하는 아이디입니다. 다시 시도해주세요.");
+        } else {
+          break;
+        }
       }
-      System.out.print("비밀번호 : ");
+
+      System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
       String password = scanner.nextLine();
 
       // while문 시작전에 변수 지정및 초기화
@@ -114,17 +123,27 @@ public class User {
 
   // 로그인 기능
 
-  public void getUserSituation() {
-    Scanner sc = new Scanner(System.in);
-    System.out.print("성별을 입력하세요. \n =>");
-    gender = sc.nextLine();
-    System.out.print("나이를 입력하세요. \n =>");
-    age = sc.nextInt();
-    System.out.printf(gender + " ");
-    System.out.print(age);
-    sc.close();
 
+
+  // 모든 회원 목록 출력
+  static void displayAllUsers() {
+    // Map은 *키-값 쌍(key-value pair)* 로 구성되어 있으며,
+    // 기본적으로 순서가 보장되지 않습니다.
+    // 즉, HashMap과 같은 Map 구현체에서는 값들이 삽입된 순서대로 나열되지 않습니다.
+    System.out.println("\n \uD83D\uDCCC 전체 회원 목록");
+
+    // userDatabase의 값들을 리스트로 변환
+    List<User> userList = new ArrayList<>(userDatabase.values());
+
+    // userList를 userNumber를 기준으로 오름차순 정렬
+    userList.sort(Comparator.comparingInt(user -> user.userNumber));
+
+    for(User user : userList) {
+      System.out.println("고유번호: "+user.userNumber+", 아이디: "+user.userid+
+          ", 이름: "+user.userName+", 나이: "+user.age+", 성별: "+user.gender);
+    }
   }
+
 
 
 }

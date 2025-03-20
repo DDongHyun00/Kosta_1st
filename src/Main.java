@@ -13,8 +13,7 @@ public class Main {
 
             switch (choice) {
                 case 1 -> User.registerUser();
-                //case 1 -> User2.registerUser();
-
+                case 3 -> User.displayAllUsers();
                 case 4 -> {
                     System.out.println("프로그램이 종료됩니다.");
                     System.exit(0);
