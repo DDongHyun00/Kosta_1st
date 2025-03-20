@@ -4,7 +4,7 @@ public class Main {
 //    private static User loggedInUser;
 
     public static void main(String[] args) {
-        while (true) {
+        while (true) { // do whlie 로 하기
             System.out.println("\n \uD83C\uDFB5 GPT Music Service");
             System.out.println("1. 회원가입 | 2. 로그인 | 3. 회원 목록 조회 | 4. 종료");
             System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");

@@ -14,6 +14,11 @@ public class User {
   private String gender; // 성별
   private String userInput; // 감정입력
 
+  // 상태값 넣어놓기 ( Enum 넣기 로그인한 상태인지
+  // 로그인과 로그아웃을 이넘으로 만들고 필드를 로그인 상태 private 으로
+  // 로그인 하면 상태가 로그인 으로 바뀌고 로그아웃으하면 로그아웃상태로
+  // setter 로 로그인, 아웃
+
   public int getAge(){
     return age;
   }
