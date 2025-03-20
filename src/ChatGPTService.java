@@ -16,9 +16,9 @@ public class ChatGPTService {
                 + "이 정보를 고려해서 제일 적절한 노래 3가지 추천해줘 \n"
                 + "3가지 노래 추천 형식은 다음과 같아 \n"
                 + "사용자의 감정은 [감정] - 세부감정은 [세부감정]\n"
-                + "1.[노래 제목] - [아티스트] - [유튜브 링크] "
-                + "2.[노래 제목] - [아티스트] - [유튜브 링크] "
-                + "3.[노래 제목] - [아티스트] - [유튜브 링크] ";
+                + "1.[노래 제목] - [아티스트] - [유튜브 링크]\n"
+                + "2.[노래 제목] - [아티스트] - [유튜브 링크]\n"
+                + "3.[노래 제목] - [아티스트] - [유튜브 링크]";
 
         JSONObject requestbody = new JSONObject();
         requestbody.put("model","gpt-3.5 Turbo");
@@ -38,8 +38,15 @@ public class ChatGPTService {
                 .POST(HttpRequest.BodyPublishers.ofString(requestbody.toString()))
                 .build();
 
+        JSONObject jsonObject = new JSONObject(requestbody);
+        JSONArray choices = jsonObject.getJSONArray("choices");
+        String responseText = choices.getJSONObject(0).getJSONObject("message").getString("content");
 
+        String[] musicList = responseText.split("\n");
 
+        for (String s : musicList) {   // 음악 3개 리스트 출력
+            System.out.println(s);
+        }
 
         return "";
     }
