@@ -56,6 +56,9 @@ public class User {
 
       System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
       String password = scanner.nextLine();
+      //아이디 :
+      //비번 :
+      //비밀번호 확인 :
 
       // while문 시작전에 변수 지정및 초기화
       String userName;
@@ -122,6 +125,32 @@ public class User {
   }
 
   // 로그인 기능
+   static User loginUser() {
+    Scanner scanner = new Scanner(System.in);
+     System.out.print("\n🔑 로그인 \n");
+     System.out.print("아이디 입력: ");
+     String userid = scanner.nextLine();
+
+     // 아이디 존재 확인
+     if(!userDatabase.containsKey(userid)) {
+       System.out.println("❌ 존재하지 않는 아이디입니다.");
+       return null;
+     }
+
+     System.out.print("비밀번호 입력: ");
+     String password = scanner.nextLine();
+
+     // 비밀번호 확인
+     User user = userDatabase.get(userid);
+     if (user.password.equals(password)) {
+       System.out.println("✅ 로그인 성공! " + user.userName + "님 환영합니다.");
+       return user;
+     } else {
+       System.out.println("❌ 비밀번호가 틀렸습니다.");
+       return null;
+     }
+
+  }
 
 
 
@@ -144,6 +173,26 @@ public class User {
     }
   }
 
+
+  static void UserDisplay() {
+
+    while (true) {
+      System.out.println("\n \uD83C\uDFB5 GPT Music Service");
+      System.out.println("1. 감정입력 | 2. 플레이리스트 확인 | 3. 로그아웃");
+      System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
+
+      Scanner scanner = new Scanner(System.in);
+      int choice = scanner.nextInt();
+
+      switch (choice) {
+        case 3 -> {
+          System.out.println("프로그램이 종료됩니다.");
+          System.exit(0);
+        }
+      }
+    }
+
+  }
 
 
 }
