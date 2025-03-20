@@ -1,6 +1,9 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URI;
+import java.net.http.HttpRequest;
+
 public class ChatGPTService {
     private static final String API_KEY = "";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
@@ -26,6 +29,14 @@ public class ChatGPTService {
 
         requestbody.put("message",messages);
 
+
+        //새로운 HTTP 요청 생성
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.openai.com/v1/chat/completions"))
+                .header("Authorization","Bearer " + "API_KEY")  //"API_KEY에 자신 API 입력
+                .header("Content-Type","application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestbody.toString()))
+                .build();
 
 
 
