@@ -58,13 +58,16 @@ public class ChatGPTService {
                 musicList.add(lines[i]);
             }
         }
-        for (String musiclist : musicList) {
-            System.out.println(mood);
-            System.out.println(musiclist);
-        }
+
+        //사용자의 감정 & 추천된 노래 3개 - 유튜브 링크 출력
+        System.out.println("☆ 추천된 노래 목록 ★\n");
+//        for (String musiclist : musicList) {
+//            System.out.println(mood);
+//            System.out.println(musiclist);
+//        }
 
 
-        return "";
+        return musicList.toString();
     }
 
 
