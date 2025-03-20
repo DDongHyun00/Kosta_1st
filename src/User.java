@@ -48,28 +48,59 @@ public class User {
       System.out.print("비밀번호 : ");
       String password = scanner.nextLine();
 
+      // while문 시작전에 변수 지정및 초기화
+      String userName;
+      int age = 0;
+      String gender;
+
       // 예외처리 while문으로 하기
-//      while(true) {
-//        // 이름에 공백이나 숫자가 입력받으면 다시 name을 입력받게하기
-//
-//
-//        // 나이를 입력할때 정수만 입력받게하기
-//
-//
-//        // 성별 - 남자 또는 여자만 입력받게하기
-//
-//
-//
-//
-//      }
-      System.out.print("이름 : ");
-      String userName = scanner.nextLine();
-      System.out.print("나이 : ");
-      int age = scanner.nextInt();
-      scanner.nextLine(); // nextInt 는 20을 입력받고 enter는 입력을 안받음
-      // 그래서 enter를 입력받기위해 nextLine을 추가해준다
-      System.out.print("성별 (남자/여자) : ");
-      String gender = scanner.nextLine();
+      while (true) {
+        // 이름에 공백이나 숫자가 입력받으면 다시 name을 입력받게하기
+        System.out.print("이름 : ");
+        userName = scanner.nextLine().trim(); // trim - 입력값앞뒤공백제거
+
+        // 이름의 입력값이 비었거나, 숫자가포함되면 경고문구표시
+        if (userName.isEmpty() || !userName.matches("^[a-zA-Z가-힣]+$")) {
+          System.out.println("이름에는 문자만 입력할 수 있습니다.");
+        } else {
+          break;
+        }
+      }
+
+      // 나이를 입력할때 정수만 입력받게하기
+      while (true) {
+        System.out.print("나이 : ");
+        if (scanner.hasNextInt()) {
+          age = scanner.nextInt();
+          scanner.nextLine();  // 버퍼에 남아있는 개행 문자 제거
+
+          // 나이 검증 추가 (나이가 음수일 경우)
+          if (age < 0) {
+            System.out.println("나이는 양의 정수여야 합니다.");
+          } else {
+            break;
+          }
+        } else {
+          System.out.println("나이는 정수만 입력할 수 있습니다.");
+          scanner.nextLine();  // 잘못된 입력 처리 후 버퍼 정리
+        }
+      }
+
+
+      // 성별 - 남자 또는 여자만 입력받게하기
+      while (true) {
+        System.out.print("성별 (남자/여자) : ");
+        gender = scanner.nextLine().trim();
+
+        // 성별이 "남자" 또는 "여자"가 아닌 경우
+        if (!gender.equals("남자") && !gender.equals("여자")) {
+          System.out.println(" \"남자\" 또는 \"여자\" 로 입력해주세요. ");
+          continue;  // 잘못된 성별 입력 시 다시 입력받도록 반복
+        } else {
+          break;
+        }
+      }
+
 
       // 사용자 객체 생성 후 Map 에 저장
       User newUser = new User(userid,password,userName,age,gender);
