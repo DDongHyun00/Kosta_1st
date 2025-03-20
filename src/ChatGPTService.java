@@ -2,16 +2,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatGPTService {
     private static final String API_KEY = "";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
     public static String getEmotion(User user, String userInput) throws Exception{
+        // [감정] - 세부감정은 [세부감정] 과 [노래 제목] - [아티스트] - [유튜브 링크]은 따로 저장
         String prompt = "사용자 정보\n"
-                + "성별:" + user.getgender() + "\n"
-                + "나이:" + user.getage() + "\n"
+                + "성별:" + user.getGender() + "\n"
+                + "나이:" + user.getAge() + "\n"
                 + "사용자가 입력한 감정 문장:" + userInput + "\n"
                 + "이 정보를 고려해서 제일 적절한 노래 3가지 추천해줘 \n"
                 + "3가지 노래 추천 형식은 다음과 같아 \n"
@@ -42,12 +46,27 @@ public class ChatGPTService {
         JSONArray choices = jsonObject.getJSONArray("choices");
         String responseText = choices.getJSONObject(0).getJSONObject("message").getString("content");
 
-        String[] musicList = responseText.split("\n");
+        String[] lines = responseText.split("\n");
+        List<String> musicList = new ArrayList<>();
+        String mood = ""; // "[감정] - 세부감정은 [세부감정]" 저장
 
-        for (String s : musicList) {   // 음악 3개 리스트 출력
-            System.out.println(s);
+        for (int i = 0; i < lines.length; i++) {
+            if(i == 0){
+                mood = lines[0];
+            }
+            else {
+                musicList.add(lines[i]);
+            }
         }
+        for (String musiclist : musicList) {
+            System.out.println(mood);
+            System.out.println(musiclist);
+        }
+
 
         return "";
     }
+
+
+
 }
