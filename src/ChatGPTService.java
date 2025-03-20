@@ -1,3 +1,6 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class ChatGPTService {
     private static final String API_KEY = "";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
@@ -13,6 +16,16 @@ public class ChatGPTService {
                 + "1.[노래 제목] - [아티스트] - [유튜브 링크] "
                 + "2.[노래 제목] - [아티스트] - [유튜브 링크] "
                 + "3.[노래 제목] - [아티스트] - [유튜브 링크] ";
+
+        JSONObject requestbody = new JSONObject();
+        requestbody.put("model","gpt-3.5 Turbo");
+
+        JSONArray messages = new JSONArray();
+        messages.put(new JSONObject().put("role","system").put("content","넌 감정 분석 및 음악 추천하는 AI야"));
+        messages.put(new JSONObject().put("role","user").put("content",userInput));
+
+        requestbody.put("message",messages);
+
 
 
 
