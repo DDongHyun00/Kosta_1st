@@ -66,8 +66,21 @@ public class User {
         }
       }
 
-      System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
-      String password = scanner.nextLine();
+      String password;
+      String confirmPassword;
+      while (true) {
+        System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
+        password = scanner.nextLine();
+        System.out.print("비밀번호 확인 : ");
+        confirmPassword = scanner.nextLine();
+
+        if (!password.equals(confirmPassword)) {
+          System.out.println("❌ 비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+        } else {
+          break; // 일치하면 while문 종료
+        }
+      }
+
       //아이디 :
       //비번 :
       //비밀번호 확인 :
