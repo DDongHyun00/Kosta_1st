@@ -11,7 +11,7 @@ public class ChatGPTService {
     private static final String API_KEY = "";
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
-    public static String getEmotion(User user, String userInput) throws Exception{
+    public static String gptRecommend(User user, String userInput) throws Exception{
         // [감정] - 세부감정은 [세부감정] 과 [노래 제목] - [아티스트] - [유튜브 링크]은 따로 저장
         String prompt = "사용자 정보\n"
                 + "성별:" + user.getGender() + "\n"
@@ -56,6 +56,7 @@ public class ChatGPTService {
             }
             else {
                 musicList.add(lines[i]);
+                System.out.println(musicList.get(i));
             }
         }
 
@@ -69,7 +70,6 @@ public class ChatGPTService {
 
         return musicList.toString();
     }
-
 
 
 }

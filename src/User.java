@@ -25,6 +25,13 @@ public class User {
     public String getGender(){
         return gender;
     }
+    public String getUserInput(){
+        return userInput;
+    }
+    public void setUserInput(String userInput){
+        this.userInput = userInput;
+    }
+
 
     // 생성자 (회원가입시 사용)
     public User(String userid, String password, String userName, int age, String gender) {
@@ -179,21 +186,43 @@ public class User {
     }
 
 
-    static void UserDisplay() {
-
-        while (true) {
+    static void UserDisplay(User user) {
+        boolean bool1 = true;
+        while (bool1) {
             System.out.println("\n \uD83C\uDFB5 GPT Music Service");
-            System.out.println("1. 감정입력 | 2. 플레이리스트 확인 | 3. 로그아웃");
+            System.out.println("1. 노래추천 | 2. 플레이리스트 확인 | 3. 로그아웃");
             System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
 
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
-                case 3 -> {
-                    System.out.println("프로그램이 종료됩니다.");
-                    System.exit(0);
+                case 1 -> {
+                    System.out.println("노래 추천을 위해 현재 감정을 입력해주세요!");
+                    System.out.print("=> ");
+                    String input = scanner.nextLine();
+                    user.setUserInput(input);
+                    System.out.println("");
+                    //여기서부터 gpt 에서 응답받은 노래3개 - 유튜브링크 출력
+                    if(user.userInput == null || user.userInput.isBlank()){
+                        System.out.println("감정 입력을 안하셨습니다.");
+                    }
+                    try {
+                        ChatGPTService.gptRecommend(user,user.getUserInput());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
+                case 2 -> {
+
+                }
+                case 3 -> {
+                    System.out.println("메인으로 돌아갑니다.");
+                    bool1 = false;
+                }
+
             }
         }
 
