@@ -3,14 +3,12 @@ import java.util.Scanner;
 public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-    int choice = scanner.nextInt();
-
-    System.out.println("\n \uD83C\uDFB5 GPT Music Service");
-    System.out.println("1. 회원가입 | 2. 로그인 | 3. 회원 목록 조회 | 4. 종료");
-    System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
 
     do {
-
+      System.out.println("\n \uD83C\uDFB5 GPT Music Service");
+      System.out.println("1. 회원가입 | 2. 로그인 | 3. 회원 목록 조회 | 4. 종료");
+      System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
+      int choice = scanner.nextInt();
       switch (choice) {
         case 1 -> User.registerUser();
         case 2 -> {
