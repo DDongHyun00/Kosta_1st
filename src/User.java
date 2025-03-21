@@ -5,6 +5,13 @@ public class User {
   private static int userCount = 0; // 사용자 총 개수( 고유번호 관리 )
   private static final Map<String, User> userDatabase = new HashMap<>(); // 회원정보 저장
 
+  // 디폴트 유저 생성 (static 초기화 블록에서 추가)
+  static {
+    // 디폴트 사용자 생성 및 추가
+    User defaultUser = new User("qwer","1234","홍길동",25,"남자");
+    userDatabase.put("qwer",defaultUser);
+  }
+
   // 개별 사용자 정보 (필드)
   private final int userNumber; // 유저 고유 번호(넘버)
   private String userid; // 유저 아이디
@@ -180,7 +187,7 @@ public class User {
 
 
   static void UserDisplay() {
-
+    PlayList playList = new PlayList();
     while (true) {
       System.out.println("\n \uD83C\uDFB5 GPT Music Service");
       System.out.println("1. 감정입력 | 2. 플레이리스트 확인 | 3. 로그아웃");
@@ -190,6 +197,7 @@ public class User {
       int choice = scanner.nextInt();
 
       switch (choice) {
+        case 2 -> playList.printPlayList();
         case 3 -> {
           System.out.println("프로그램이 종료됩니다.");
           System.exit(0);

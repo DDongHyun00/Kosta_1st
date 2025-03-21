@@ -31,7 +31,12 @@ public class PlayList {
   // 플리 데이터 출력 메소드
   public void printPlayList() {
     // playList의 모든 감정별 음악 목록을 출력
-    //for ()
+    for (Map.Entry<String,List<String>> entry : playList.entrySet()) {
+      System.out.println("감정" + entry.getKey()); // 키(감정)를 출력
+      for (String music : entry.getValue()) {
+        System.out.println("음악 : " + entry.getValue());
+      }
+    }
 
   }
 
