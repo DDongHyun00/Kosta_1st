@@ -4,18 +4,14 @@ public class Main {
 //    private static User loggedInUser;
 
     public static void main(String[] args) {
-        while (true) {
-            System.out.println("\n \uD83C\uDFB5 GPT Music Service");
-            System.out.println("1. 회원가입 | 2. 로그인 | 3. 회원 목록 조회 | 4. 종료");
-            System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
 
-            int a = 0, b = 1, c = 2;
-            System.out.println(a);
-            System.out.println(b);
-            System.out.println(c);
+        System.out.println("\n \uD83C\uDFB5 GPT Music Service");
+        System.out.println("1. 회원가입 | 2. 로그인 | 3. 회원 목록 조회 | 4. 종료");
+        System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
 
-            Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
+        do {
 
             switch (choice) {
                 case 1 -> User.registerUser();
@@ -35,7 +31,9 @@ public class Main {
                 }
                 default -> System.out.println("❌ 잘못된 입력입니다.");
             }
+
         }
+        while (true);
 
 //        while (true) {
 //            System.out.println("\n \uD83C\uDFB5 GPT Music Service");
