@@ -5,6 +5,12 @@ public class User {
     private static int userCount = 0; // 사용자 총 개수( 고유번호 관리 )
     private static final Map<String, User> userDatabase = new HashMap<>(); // 회원정보 저장
 
+    // default 유저 생성 및 추가
+    static {
+        User defaultUser = new User("qwer","1234","홍길동",12,"남자");
+        userDatabase.put("qwer",defaultUser);
+    }
+
     // 개별 사용자 정보 (필드)
     private final int userNumber; // 유저 고유 번호(넘버)
     private String userid; // 유저 아이디
@@ -55,22 +61,41 @@ public class User {
             String userid;
             while (true) {
                 System.out.print("아이디 : ");
-                userid = scanner.nextLine();
+                userid = scanner.nextLine().trim(); // trim - 입력값앞뒤공백제거
 
                 // 아이디 중복체크 ( 아이디 키값이 존재하는지 확인)
 
-                if (userDatabase.containsKey(userid)) {
+                if (userid.isEmpty()) {
+                    System.out.println("❌ 아이디에는 하나 이상의 영문이나 숫자가 반드시 포함되어야 합니다.");
+                } else if (!userid.matches("^[a-zA-Z0-9]+$")) {
+                    System.out.println("❌ 아이디에는 영문과 숫자만 입력할 수 있습니다.");
+                } else if (userDatabase.containsKey(userid)) {
                     System.out.println("❌ 이미 존재하는 아이디입니다. 다시 시도해주세요.");
                 } else {
                     break;
                 }
             }
 
-            System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
-            String password = scanner.nextLine();
+            String password;
+            String confirmPassword;
+            while (true) {
+                System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
+                password = scanner.nextLine();
+
+                System.out.print("비밀번호 확인 : ");   //비밀번호 확인 추가!
+                confirmPassword = scanner.nextLine();
+
+                if (! password.equals(confirmPassword)){
+                    System.out.println("❌ 비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+                } else {
+                    break;
+                }
+            }
             //아이디 :
             //비번 :
             //비밀번호 확인 :
+
+
 
             // while문 시작전에 변수 지정및 초기화
             String userName;
@@ -84,8 +109,10 @@ public class User {
                 userName = scanner.nextLine().trim(); // trim - 입력값앞뒤공백제거
 
                 // 이름의 입력값이 비었거나, 숫자가포함되면 경고문구표시
-                if (userName.isEmpty() || !userName.matches("^[a-zA-Z가-힣]+$")) {
-                    System.out.println("이름에는 문자만 입력할 수 있습니다.");
+              if (userName.isEmpty()) {
+                    System.out.println("❌ 이름에는 하나 이상의 한글 문자가 반드시 포함되어야 합니다.");
+                } else if (!userName.matches("^[가-힣]+$")) {
+                    System.out.println("❌ 이름에는 한글 문자만 입력할 수 있습니다.");
                 } else {
                     break;
                 }
@@ -187,6 +214,7 @@ public class User {
 
 
     static void UserDisplay(User user) {
+        PlayList playList = new PlayList();
         boolean bool1 = true;
         while (bool1) {
             System.out.println("\n \uD83C\uDFB5 GPT Music Service");
@@ -215,8 +243,8 @@ public class User {
                     }
 
                 }
-                case 2 -> {
-
+                case 2 -> {  //플레이리스트
+                    playList.printPlayList();
                 }
                 case 3 -> {
                     System.out.println("메인으로 돌아갑니다.");
