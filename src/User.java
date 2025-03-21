@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class User {
     // 모든 사용자 정보
@@ -17,6 +14,11 @@ public class User {
     private String gender; // 성별
     private String userInput; // 감정입력
 
+    // 상태값 넣어놓기 ( Enum 넣기 로그인한 상태인지
+    // 로그인과 로그아웃을 이넘으로 만들고 필드를 로그인 상태 private 으로
+    // 로그인 하면 상태가 로그인 으로 바뀌고 로그아웃으하면 로그아웃상태로
+    // setter 로 로그인, 아웃
+
     public int getAge(){
         return age;
     }
@@ -25,8 +27,6 @@ public class User {
     }
 
     // 생성자 (회원가입시 사용)
-
-
     public User(String userid, String password, String userName, int age, String gender) {
         this.userNumber = ++userCount; // 값을 입력받지않고 자동증가(기본키)
         this.userid = userid;
@@ -44,16 +44,26 @@ public class User {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("\n \uD83D\uDCDD 회원가입을 진행합니다.");
-            System.out.print("아이디 : ");
-            String userid = scanner.nextLine();
 
-            // 아이디 중복체크 ( 아이디 키값이 존재하는지 확인)
-            if (userDatabase.containsKey(userid)) {
-                System.out.println("❌ 이미 존재하는 아이디입니다. 다시 시도해주세요.");
-                return;
+            String userid;
+            while (true) {
+                System.out.print("아이디 : ");
+                userid = scanner.nextLine();
+
+                // 아이디 중복체크 ( 아이디 키값이 존재하는지 확인)
+
+                if (userDatabase.containsKey(userid)) {
+                    System.out.println("❌ 이미 존재하는 아이디입니다. 다시 시도해주세요.");
+                } else {
+                    break;
+                }
             }
-            System.out.print("비밀번호 : ");
+
+            System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
             String password = scanner.nextLine();
+            //아이디 :
+            //비번 :
+            //비밀번호 확인 :
 
             // while문 시작전에 변수 지정및 초기화
             String userName;
@@ -120,16 +130,72 @@ public class User {
     }
 
     // 로그인 기능
+    static User loginUser() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\n🔑 로그인 \n");
+        System.out.print("아이디 입력: ");
+        String userid = scanner.nextLine();
 
-    public void getUserSituation() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("성별을 입력하세요. \n =>");
-        gender = sc.nextLine();
-        System.out.print("나이를 입력하세요. \n =>");
-        age = sc.nextInt();
-        System.out.printf(gender + " ");
-        System.out.print(age);
-        sc.close();
+        // 아이디 존재 확인
+        if(!userDatabase.containsKey(userid)) {
+            System.out.println("❌ 존재하지 않는 아이디입니다.");
+            return null;
+        }
+
+        System.out.print("비밀번호 입력: ");
+        String password = scanner.nextLine();
+
+        // 비밀번호 확인
+        User user = userDatabase.get(userid);
+        if (user.password.equals(password)) {
+            System.out.println("✅ 로그인 성공! " + user.userName + "님 환영합니다.");
+            return user;
+        } else {
+            System.out.println("❌ 비밀번호가 틀렸습니다.");
+            return null;
+        }
+
+    }
+
+
+
+    // 모든 회원 목록 출력
+    static void displayAllUsers() {
+        // Map은 *키-값 쌍(key-value pair)* 로 구성되어 있으며,
+        // 기본적으로 순서가 보장되지 않습니다.
+        // 즉, HashMap과 같은 Map 구현체에서는 값들이 삽입된 순서대로 나열되지 않습니다.
+        System.out.println("\n \uD83D\uDCCC 전체 회원 목록");
+
+        // userDatabase의 값들을 리스트로 변환
+        List<User> userList = new ArrayList<>(userDatabase.values());
+
+        // userList를 userNumber를 기준으로 오름차순 정렬
+        userList.sort(Comparator.comparingInt(user -> user.userNumber));
+
+        for(User user : userList) {
+            System.out.println("고유번호: "+user.userNumber+", 아이디: "+user.userid+
+                    ", 이름: "+user.userName+", 나이: "+user.age+", 성별: "+user.gender);
+        }
+    }
+
+
+    static void UserDisplay() {
+
+        while (true) {
+            System.out.println("\n \uD83C\uDFB5 GPT Music Service");
+            System.out.println("1. 감정입력 | 2. 플레이리스트 확인 | 3. 로그아웃");
+            System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
+
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 3 -> {
+                    System.out.println("프로그램이 종료됩니다.");
+                    System.exit(0);
+                }
+            }
+        }
 
     }
 
