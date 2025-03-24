@@ -14,6 +14,10 @@ public class User {
     private String gender; // 성별
     private String userInput; // 감정입력
 
+    static {
+        User defaultUser = new User("qwer","1234","홍길동",20,"남자");
+        userDatabase.put("qwer",defaultUser);
+    }
     // 상태값 넣어놓기 ( Enum 넣기 로그인한 상태인지
     // 로그인과 로그아웃을 이넘으로 만들고 필드를 로그인 상태 private 으로
     // 로그인 하면 상태가 로그인 으로 바뀌고 로그아웃으하면 로그아웃상태로
@@ -187,46 +191,81 @@ public class User {
 
 
     static void UserDisplay(User user) {
+        Scanner scanner = new Scanner(System.in);
         boolean bool1 = true;
+
+        PlayList playList = new PlayList(); // 🔄 반복문 바깥에 1번만 생성
+
         while (bool1) {
             System.out.println("\n \uD83C\uDFB5 GPT Music Service");
             System.out.println("1. 노래추천 | 2. 플레이리스트 확인 | 3. 로그아웃");
             System.out.print("원하는 서비스를 선택해주세요.(※숫자를 입력해주세요) : ");
 
-            Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             scanner.nextLine();
-            PlayList playList = new PlayList();
+
             switch (choice) {
+//                case 1 -> {
+//                    System.out.println("노래 추천을 위해 현재 감정을 입력해주세요!");
+//                    System.out.print("=> ");
+//                    String input = scanner.nextLine();
+//                    user.setUserInput(input);
+//                    System.out.println("");
+//
+//                    if (user.getUserInput() == null || user.getUserInput().isBlank()) {
+//                        System.out.println("감정 입력을 안하셨습니다.");
+//                    } else {
+//                        try {
+//                            ChatGPTService.gptRecommend(user, user.getUserInput());
+//                            playList.addMusicList(user, user.getUserInput()); // ✅ 추천 결과 저장
+//                        } catch (Exception e) {
+//                            System.out.println("GPT 추천 중 오류 발생: " + e.getMessage());
+//                        }
+//                    }
+//                }
                 case 1 -> {
                     System.out.println("노래 추천을 위해 현재 감정을 입력해주세요!");
                     System.out.print("=> ");
                     String input = scanner.nextLine();
                     user.setUserInput(input);
-                    System.out.println("");
-                    //여기서부터 gpt 에서 응답받은 노래3개 - 유튜브링크 출력
-                    if(user.userInput == null || user.userInput.isBlank()){
-                        System.out.println("감정 입력을 안하셨습니다.");
-                    }
-                    try {
-                        ChatGPTService.gptRecommend(user,user.getUserInput());
-                        //playList.addMusicList(user,user.userInput);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    System.out.println();
 
+                    if (user.getUserInput() == null || user.getUserInput().isBlank()) {
+                        System.out.println("감정 입력을 안하셨습니다.");
+                    } else {
+                        try {
+                            // ✅ GPT 한 번만 호출
+                            ChatGPTResponse result = ChatGPTService.gptRecommend(user, user.getUserInput());
+
+                            // ✅ 결과 출력
+                            System.out.println("☆ 추천된 노래 목록 ★");
+                            System.out.println(result.getMood());
+                            for (String music : result.getMusicList()) {
+                                System.out.println(music);
+                            }
+
+                            // ✅ 플레이리스트에 저장
+                            playList.addMusicList(user.getUserInput(), result);
+
+                        } catch (Exception e) {
+                            System.out.println("GPT 추천 중 오류 발생: " + e.getMessage());
+                        }
+                    }
                 }
+
+
                 case 2 -> {
-                    playList.printPlayList();
+                    playList.printPlayList(); // ✅ 저장된 추천 목록 확인 가능
                 }
+
                 case 3 -> {
                     System.out.println("메인으로 돌아갑니다.");
                     bool1 = false;
                 }
 
+                default -> System.out.println("❌ 올바른 숫자를 입력해주세요.");
             }
         }
-
     }
 
 
