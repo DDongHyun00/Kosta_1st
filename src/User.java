@@ -186,6 +186,7 @@ public class User {
     }
 
 
+
     static void UserDisplay(User user) {
         boolean bool1 = true;
         while (bool1) {
@@ -196,7 +197,7 @@ public class User {
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             scanner.nextLine();
-
+            PlayList playList = new PlayList();
             switch (choice) {
                 case 1 -> {
                     System.out.println("노래 추천을 위해 현재 감정을 입력해주세요!");
@@ -210,13 +211,14 @@ public class User {
                     }
                     try {
                         ChatGPTService.gptRecommend(user,user.getUserInput());
+//                        playList.addMusicList(user,user.userInput);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
 
                 }
                 case 2 -> {
-
+                    playList.printPlayList();
                 }
                 case 3 -> {
                     System.out.println("메인으로 돌아갑니다.");
