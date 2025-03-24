@@ -31,7 +31,9 @@ public class User {
     public void setUserInput(String userInput){
         this.userInput = userInput;
     }
-
+    public String getUserName(){
+        return userName;
+    }
 
     // 생성자 (회원가입시 사용)
     public User(String userid, String password, String userName, int age, String gender) {
@@ -209,8 +211,49 @@ public class User {
                         System.out.println("감정 입력을 안하셨습니다.");
                     }
                     try {
-                        ChatGPTService.gptRecommend(user,user.getUserInput());
-                        //playList.addMusicList(user,user.userInput);
+//
+//                        // gptResult 파싱해서 mood, musicList 추출
+//                        String gptResult = ChatGPTService.gptRecommend(user, user.getUserInput());
+//                        String[] lines = gptResult.split("\n");
+//                        String mood = "";
+//                        List<String> musicList = new ArrayList<>();
+//
+//                        for (String line : lines) {
+//                            line = line.trim();
+//                            if (line.startsWith("1.") || line.startsWith("2.") || line.startsWith("3.")) {
+//                                musicList.add(line);
+//                            } else {
+//                                mood += line + "\n";
+//                            }
+//                        }
+//
+//                        mood = mood.trim();
+//
+//                        playList.addMusicList(mood, musicList);
+                        String gptResponse = ChatGPTService.gptRecommend(user, user.getUserInput());
+
+// 🔧 노래 목록 줄바꿈 누락 방지
+                        gptResponse = gptResponse.replace("1.", "\n1.")
+                                .replace("2.", "\n2.")
+                                .replace("3.", "\n3.");
+
+                        String[] lines = gptResponse.split("\n");
+                        StringBuilder moodBuilder = new StringBuilder();
+                        List<String> musicList = new ArrayList<>();
+
+                        for (String line : lines) {
+                            line = line.trim();
+                            if (line.startsWith("1.") || line.startsWith("2.") || line.startsWith("3.")) {
+                                musicList.add(line);
+                            } else if (!line.isBlank()) {
+                                moodBuilder.append(line).append("\n");
+                            }
+                        }
+
+                        String mood = moodBuilder.toString().trim();  // 감정 내용 완성
+
+// 🔽 플레이리스트 저장
+                        playList.addMusicList(mood, musicList);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

@@ -13,28 +13,40 @@ public class PlayList {
     // gpt클래스에서 playList 메소드 호출해서 거기에 값을 넣어주는 코드를 추가해야함
 
     // 1. ChatGPTService 객체를 PlayList에서 직접 생성하는 방식
-    void addMusicList(User user, String userInput) throws Exception {
-        // ChatGPTService 객체 생성
-        ChatGPTService gpt = new ChatGPTService();
-
-        // getEmotion 메소드로 감정과 음악 목록 받아오기
-        String mood = gpt.gptRecommend(user,userInput);// 여기서 mood는 감정 정보와 음악 목록이 함께 반환됨
-
-        // 감정(mood)과 음악 목록(playList)을 playList에 추가
-        List<String> musicList = new ArrayList<>();
-        musicList.add(mood); // 감정을 첫 번째 요소로 추가
-
-        playList.put(userInput, musicList); // 감정별로 musicList를 저장
+    void addMusicList(String mood, List<String>musicList) {
+//        playList.put(mood, musicList); // 감정별로 musicList를 저장
+        playList.put(mood, new ArrayList<>(musicList));  // 복사본 저장
 
     }
 
     // 플리 데이터 출력 메소드
     public void printPlayList() {
-        // playList의 모든 감정별 음악 목록을 출력
-        for (Map.Entry<String,List<String>> entry : playList.entrySet()) {
-            System.out.println("감정 : " + entry.getKey()); // 키(감정)를 출력
-            for (String music : entry.getValue()) {
-                System.out.println("음악 : " + music +"\n");
+        if (playList.isEmpty()) {
+            System.out.println("🎵 저장된 플레이리스트가 없습니다.");
+            return;
+        }
+
+//        // playList의 모든 감정별 음악 목록을 출력
+//        for (Map.Entry<String,List<String>> entry : playList.entrySet()) {
+//            System.out.println("감정 : " + entry.getKey()); // 키(감정)를 출력
+//            List<String> musicList = entry.getValue();
+//
+//            for (String music : musicList) {
+//                System.out.println("음악 : " + music +"\n");
+//            }
+//        }
+        if (playList.isEmpty()) {
+            System.out.println("🎵 저장된 플레이리스트가 없습니다.");
+            return;
+        }
+
+        for (Map.Entry<String, List<String>> entry : playList.entrySet()) {
+            String mood = entry.getKey();
+            List<String> songs = entry.getValue();
+
+            System.out.println("\n📌 플레이리스트 : " + mood); // 감정 설명 줄
+            for (String song : entry.getValue()) {
+                System.out.println("🎵 " + song); // 한 줄씩 노래 출력
             }
         }
 

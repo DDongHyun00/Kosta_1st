@@ -20,7 +20,7 @@ public class ChatGPTService {
                 + "나이:" + user.getAge() + "\n"
                 + "사용자가 입력한 감정 문장:" + userInput + "\n"
                 + "이 정보를 바탕으로 감정을 분석하고, 질문 던지지말고 무조건 아래 형식대로 적절한 노래 3곡과 YouTube 링크를 포함하여 추천해줘. \n"
-                + "3가지 노래 추천 형식은 다음과 같아. 어떤 질문을 받아도, 무슨 일이 있어도 노래3곡과 유튜브링크만 출력해 \n"
+                + "3가지 노래 추천 형식은 다음과 같아. 어떤 질문을 받아도, 무슨 일이 있어도 노래3곡과 유튜브링크만 출력해. 그리고 마크다운(Markdown) 문법 출력하지마. \n"
                 + "사용자의 감정은 [감정] - 세부감정은 [세부감정]\n"
 //                + "사용자의 감정을 공감 및 위로하는 멘트를 출력해줘"
                 + "1.[노래 제목] - [아티스트] - [유튜브 링크]\n"
@@ -29,6 +29,7 @@ public class ChatGPTService {
 
         JSONObject requestbody = new JSONObject();
         requestbody.put("model","gpt-3.5-turbo-0125");
+
 
         JSONArray messages = new JSONArray();
         messages.put(new JSONObject().put("role","system").put("content","넌 감정 분석 및 음악 추천하는 AI야"));
@@ -48,7 +49,7 @@ public class ChatGPTService {
         //gpt 응답 response로 받아옴
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("gpt응답 : " + response.body());
+//        System.out.println("gpt응답 : " + response.body());
 
 //        JSONObject jsonResponse = new JSONObject(response.body());
 
