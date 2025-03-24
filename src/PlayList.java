@@ -18,7 +18,7 @@ public class PlayList {
         ChatGPTService gpt = new ChatGPTService();
 
         // getEmotion 메소드로 감정과 음악 목록 받아오기
-        String mood = gpt.getEmotion(user,userInput);// 여기서 mood는 감정 정보와 음악 목록이 함께 반환됨
+        String mood = gpt.gptRecommend(user,userInput);// 여기서 mood는 감정 정보와 음악 목록이 함께 반환됨
 
         // 감정(mood)과 음악 목록(playList)을 playList에 추가
         List<String> musicList = new ArrayList<>();
