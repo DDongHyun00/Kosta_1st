@@ -30,7 +30,6 @@ public class ChatGPTService {
         JSONObject requestbody = new JSONObject();
         requestbody.put("model","gpt-3.5-turbo-0125");
 
-
         JSONArray messages = new JSONArray();
         messages.put(new JSONObject().put("role","system").put("content","넌 감정 분석 및 음악 추천하는 AI야"));
         messages.put(new JSONObject().put("role","user").put("content",prompt));
