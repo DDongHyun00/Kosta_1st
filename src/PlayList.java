@@ -32,9 +32,9 @@ public class PlayList {
     public void printPlayList() {
         // playList의 모든 감정별 음악 목록을 출력
         for (Map.Entry<String,List<String>> entry : playList.entrySet()) {
-            System.out.println("감정" + entry.getKey()); // 키(감정)를 출력
+            System.out.println("감정 : "  + entry.getKey()); // 키(감정)를 출력
             for (String music : entry.getValue()) {
-                System.out.println("음악 : " + entry.getValue());
+                System.out.println("음악 : " + entry.getValue()+"\n");
             }
         }
 
