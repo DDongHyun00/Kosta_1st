@@ -30,7 +30,6 @@ public class Main {
                         System.out.println("🎶 로그인 후 음악 추천 서비스 이용 가능!");
                     }
                 }
-
                 case 3 -> User.displayAllUsers();
                 case 4 -> {
                     System.out.println("프로그램이 종료됩니다.");
@@ -38,10 +37,7 @@ public class Main {
                 }
                 default -> System.out.println("❌ 잘못된 입력입니다.");
             }
-
         }
         while (true);
-
-
     }
 }

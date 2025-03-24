@@ -25,7 +25,6 @@ public class PlayList {
     musicList.add(mood); // 감정을 첫 번째 요소로 추가
 
     playList.put(userInput, musicList); // 감정별로 musicList를 저장
-
   }
 
   // 플리 데이터 출력 메소드
@@ -37,9 +36,5 @@ public class PlayList {
         System.out.println("음악 : " + entry.getValue());
       }
     }
-
   }
-
-
-
 }

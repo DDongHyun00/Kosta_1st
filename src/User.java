@@ -137,7 +137,6 @@ public class User {
                 }
             }
 
-
             // 성별 - 남자 또는 여자만 입력받게하기
             while (true) {
                 System.out.print("성별 (남자/여자) : ");
@@ -188,7 +187,6 @@ public class User {
        System.out.println("❌ 비밀번호가 틀렸습니다.");
        return null;
      }
-
     }
 
 
@@ -253,8 +251,7 @@ public class User {
 
             }
         }
-
-  }
+    }
 
 
 }
