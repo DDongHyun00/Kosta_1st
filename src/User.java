@@ -18,11 +18,7 @@ public class User {
         User defaultUser = new User("qwer","1234","홍길동",20,"남자");
         userDatabase.put("qwer",defaultUser);
     }
-    // 상태값 넣어놓기 ( Enum 넣기 로그인한 상태인지
-    // 로그인과 로그아웃을 이넘으로 만들고 필드를 로그인 상태 private 으로
-    // 로그인 하면 상태가 로그인 으로 바뀌고 로그아웃으하면 로그아웃상태로
-    // setter 로 로그인, 아웃
-
+=
     public int getAge(){
         return age;
     }
@@ -72,11 +68,9 @@ public class User {
 
             System.out.print("비밀번호 : ");   //비밀번호 확인 추가!
             String password = scanner.nextLine();
-            //아이디 :
-            //비번 :
-            //비밀번호 확인 :
 
-            // while문 시작전에 변수 지정및 초기화
+
+            // while문 시작전에 변수 지정 및 초기화
             String userName;
             int age = 0;
             String gender;
@@ -172,9 +166,7 @@ public class User {
 
     // 모든 회원 목록 출력
     static void displayAllUsers() {
-        // Map은 *키-값 쌍(key-value pair)* 로 구성되어 있으며,
-        // 기본적으로 순서가 보장되지 않습니다.
-        // 즉, HashMap과 같은 Map 구현체에서는 값들이 삽입된 순서대로 나열되지 않습니다.
+
         System.out.println("\n \uD83D\uDCCC 전체 회원 목록");
 
         // userDatabase의 값들을 리스트로 변환
@@ -205,24 +197,6 @@ public class User {
             scanner.nextLine();
 
             switch (choice) {
-//                case 1 -> {
-//                    System.out.println("노래 추천을 위해 현재 감정을 입력해주세요!");
-//                    System.out.print("=> ");
-//                    String input = scanner.nextLine();
-//                    user.setUserInput(input);
-//                    System.out.println("");
-//
-//                    if (user.getUserInput() == null || user.getUserInput().isBlank()) {
-//                        System.out.println("감정 입력을 안하셨습니다.");
-//                    } else {
-//                        try {
-//                            ChatGPTService.gptRecommend(user, user.getUserInput());
-//                            playList.addMusicList(user, user.getUserInput()); // ✅ 추천 결과 저장
-//                        } catch (Exception e) {
-//                            System.out.println("GPT 추천 중 오류 발생: " + e.getMessage());
-//                        }
-//                    }
-//                }
                 case 1 -> {
                     System.out.println("노래 추천을 위해 현재 감정을 입력해주세요!");
                     System.out.print("=> ");
@@ -234,17 +208,17 @@ public class User {
                         System.out.println("감정 입력을 안하셨습니다.");
                     } else {
                         try {
-                            // ✅ GPT 한 번만 호출
+                            //  GPT 한 번만 호출
                             ChatGPTResponse result = ChatGPTService.gptRecommend(user, user.getUserInput());
 
-                            // ✅ 결과 출력
+                            //  결과 출력
                             System.out.println("☆ 추천된 노래 목록 ★");
                             System.out.println(result.getMood());
                             for (String music : result.getMusicList()) {
                                 System.out.println(music);
                             }
 
-                            // ✅ 플레이리스트에 저장
+                            //  플레이리스트에 저장
                             playList.addMusicList(user.getUserInput(), result);
 
                         } catch (Exception e) {
