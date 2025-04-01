@@ -18,7 +18,7 @@ public class User {
         User defaultUser = new User("qwer","1234","홍길동",20,"남자");
         userDatabase.put("qwer",defaultUser);
     }
-=
+
     public int getAge(){
         return age;
     }
