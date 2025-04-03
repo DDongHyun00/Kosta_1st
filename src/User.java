@@ -12,6 +12,7 @@ public class User {
     private String userName; // 유저 이름
     private int age; // 나이
     private String gender; // 성별
+
     private String userInput; // 감정입력
 
     // 개별 사용자 플레이리스트
