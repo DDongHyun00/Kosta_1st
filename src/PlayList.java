@@ -7,7 +7,7 @@ public class PlayList {
 
 
     // gpt한테 받아온 감정과 음악을 담을 Map 생성
-    private static Map<String, List<String>> playList = new HashMap();
+    private Map<String, List<String>> playList = new HashMap();
 
     public void printPlayList() {
         for (Map.Entry<String, List<String>> entry : playList.entrySet()) {
