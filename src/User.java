@@ -14,10 +14,10 @@ public class User {
     private String gender; // 성별
     private String userInput; // 감정입력
 
-    static {
-        User defaultUser = new User("qwer","1234","홍길동",20,"남자");
-        userDatabase.put("qwer",defaultUser);
-    }
+    // 개별 사용자 플레이리스트
+    private PlayList playList = new PlayList();
+
+
 
     public int getAge(){
         return age;
@@ -28,6 +28,10 @@ public class User {
     public String getUserInput(){
         return userInput;
     }
+    public PlayList getPlayList() {
+        return playList;
+    }
+
     public void setUserInput(String userInput){
         this.userInput = userInput;
     }
@@ -186,7 +190,7 @@ public class User {
         Scanner scanner = new Scanner(System.in);
         boolean bool1 = true;
 
-        PlayList playList = new PlayList(); // 🔄 반복문 바깥에 1번만 생성
+        PlayList playList = user.getPlayList(); // 🔄 반복문 바깥에 1번만 생성
 
         while (bool1) {
             System.out.println("\n \uD83C\uDFB5 GPT Music Service");
