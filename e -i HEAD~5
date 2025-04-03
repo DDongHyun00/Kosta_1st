@@ -1,0 +1,57 @@
+[33m6e672b9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32myoonbin[m[33m)[m user클래스 DB연동(회원가입까지만)
+[33m7849b6e[m 임시저장
+[33m3d34525[m[33m ([m[1;31morigin/yoonbin[m[33m)[m 플레이리스트 저장 및 출력 완료
+[33mf7cff4b[m 플레이리스트 완성 0.5
+[33mb7919fd[m 플레이리스트 완성 0.4
+[33mf8748cd[m 플레이리스트 완성 0.3
+[33m58c4e37[m 플레이리스트 완성 0.2
+[33mc12f448[m gitignotre - iml적용
+[33m2ad7dbf[m playlist
+[33mc989853[m 플레이리스트 완성 0.2
+[33m2a2c779[m 플레이리스트 완성 0.2
+[33m0bd1e63[m 기능 개선
+[33me458a2b[m 플레이리스트 완성 0.1
+[33m24c353e[m 중간저장
+[33mc27e1a8[m .
+[33m67939be[m 메뉴 반복 기능 개선
+[33m7aca1e7[m registerUser ver_0.4
+[33m60b158e[m 메뉴 반복 기능 개선
+[33m759dc6a[m .
+[33me15f8ce[m .
+[33m90bfbe5[m registerUser ver_0.4
+[33mf662839[m registerUser ver_0.3
+[33m3ebcc91[m registerUser ver_0.2
+[33m083e92a[m GPTService
+[33m2f5c167[m registerUser ver_0.1
+[33m6365e03[m 감정, 추천 노래 리스트 저장
+[33m0462b89[m .
+[33mf8383ff[m 회원가입 예외처리 2차 업로드
+[33mce16106[m 추천 음악 3개 반환
+[33mc582e5b[m .
+[33m6902cf4[m 회원가입1차업로드
+[33ma5a1310[m Http 요청 생성
+[33mc3a72ea[m json데이터 생성
+[33m9481d84[m registerUser추가
+[33m3b43eed[m User정보 getter 추가
+[33mf783ca2[m gpt 입력 prompt 추가
+[33m7e278d6[m first
+[33mb1c3015[m user 필드
+[33me4b4046[m gitignor 적용
+[33mdd61539[m gitignor 적용
+[33m9014f52[m test yoonbin
+[33me889c3f[m gitignore적용
+[33meafb3aa[m gitignore적용
+[33me60c175[m .
+[33mbb8205d[m Merge branch 'donghyun' of https://github.com/DDongHyun00/Kosta_1st into donghyun
+[33m70d44af[m .
+[33md006c04[m test yoonbin
+[33m55efc7c[m test-yoonbin
+[33m0edc6b0[m Delete Kosta_1st.iml
+[33m9fef98f[m .
+[33m289f548[m[33m ([m[1;32mmain[m[33m)[m Delete Kosta_1st.iml
+[33m1397fae[m .
+[33m0248427[m chatGPT_API
+[33m4fc39af[m .
+[33m8611bd7[m 초기설정
+[33m187aba0[m Create README.md
+[33mafda009[m .
